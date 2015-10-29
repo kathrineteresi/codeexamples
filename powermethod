@@ -1,0 +1,40 @@
+
+function levi = power(A, q, n, v);
+
+fprintf('j    q(1)    q(2)     maximum eigen value    Rate of Convergence\n');
+
+for j = 1:n
+
+q(:,j+1) = A*q(:,j);
+
+s = max(abs(q(:,j+1)));
+
+q(:,j+1) = q(:,j+1)/s;
+
+
+E1 = norm(q(:,j+1) - v);
+E2 = norm(q(:,j) - v);
+
+E = E1/E2;
+
+
+fprintf('%2d %9.6f %9.6f %9.6f %9.6f\n', j, q(1,j+1), q(2,j+1),s, E);
+
+end
+
+
+
+%%This is the driver that is usually ran in a different document
+
+n= 6;
+
+A = [7 1; 1 0];
+
+q = [1 1]'
+
+v = [1, 0.140055]'
+
+
+power(A, q, n,v)
+
+%export(DS, '-dpdf', HW 6);
